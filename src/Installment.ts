@@ -14,10 +14,10 @@ export default class Installment {
 
   calculateMdr() {
     if (this.tax.amount) {
-      this.mdr = this.tax.amount;
+      this.mdr += this.tax.amount;
     }
     if (this.tax.percentage) {
-      this.mdr = (this.tax.percentage * this.amount) / 100;
+      this.mdr += (this.tax.percentage * this.amount) / 100;
     }
   }
 }

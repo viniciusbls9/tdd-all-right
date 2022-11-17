@@ -128,3 +128,21 @@ test("Deve criar uma transação no cartão de crédito em 4 parcelas, fazer o p
   const [installment1] = transaction.installments;
   expect(installment1.mdr).toBe(2.5);
 });
+
+test("Deve criar uma transação no cartão de crédito em 4 parcelas, fazer o pagamento e calcular o MDR variavel e fixo", () => {
+  const email = "vinicius@gmail.com";
+  const amount = 1000;
+  const paymentMethod = "credit_card";
+  const installments = 4;
+  const tax = new Tax("credit_card", 1, 0.5);
+  const transaction = new Transaction(
+    email,
+    amount,
+    paymentMethod,
+    installments,
+    tax
+  );
+  transaction.pay(1);
+  const [installment1] = transaction.installments;
+  expect(installment1.mdr).toBe(3);
+});
