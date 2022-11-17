@@ -9,7 +9,7 @@ export default class Transaction {
     readonly amount: number,
     readonly paymentMethod: string,
     readonly numberOfInstallments: number = 1,
-    readonly taxes: Tax
+    readonly tax: Tax
   ) {
     this.installments = [];
     this.generateInstallments();
@@ -21,7 +21,8 @@ export default class Transaction {
     while (installmentsNumber <= this.numberOfInstallments) {
       const installment = new Installment(
         installmentsNumber++,
-        installmentAmount
+        installmentAmount,
+        this.tax
       );
       this.installments.push(installment);
     }
